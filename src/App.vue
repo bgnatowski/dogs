@@ -6,7 +6,8 @@
 <template>
     <h1>Dogs</h1>
     <h2>Dog Image</h2>
-    <DogImage></DogImage>
+    <DogImage breed="akita" width="200px" height="200px"></DogImage>
+    <DogImage breed="shepherd australian"></DogImage>
     <h2>Breeds</h2>
     <BreedList flex></BreedList>
     <h2>In column</h2>

@@ -1,16 +1,20 @@
+const breeds = []
 async function getBreeds() {
-    const breeds = []
+    console.log('get breeds', breeds.length)
+    if(breeds.length) return breeds
     try {
+        console.log('get breeds', 'start fetch')
         const response = await fetch('https://dog.ceo/api/breeds/list/all')
         const {message} = await response.json()
         // oblicz breeds
         Object.keys(message).forEach(key => {
-            if (message[key].length == 0) {
+            if (message[key].length === 0) {
                 breeds.push(key)
             } else {
                 message[key].forEach(sub => breeds.push(`${sub} ${key}`))
             }
         })
+        console.log('get breeds', 'fetch done')
     } catch {
         console.log('Błąd w czasie pobierania danych')
     }
@@ -22,7 +26,7 @@ async function getBreeds() {
 
 async function getRandomImage(breed){
     try {
-        breed = breed.split('git  ').reverse().join('/')
+        breed = breed.split(' ').reverse().join('/')
         const path = `https://dog.ceo/api/breed/${breed}/images/random`;
         const response = await fetch(path)
         const { message } = await response.json()
