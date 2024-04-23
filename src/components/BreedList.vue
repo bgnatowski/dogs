@@ -1,30 +1,28 @@
 <script setup>
-  import { ref, onBeforeMount } from 'vue'
-  import { getBreeds } from "@/data.js";
+import breeds from "@/state/breeds.js";
 
-  const props = defineProps({
+const props = defineProps({
     flex: Boolean,
-  })
-
-  const breeds = ref([])
-  onBeforeMount(async () => breeds.value = await getBreeds())
+})
 </script>
 
 <template>
-  <div :class="flex ? 'flex' : ''">
-    <p v-for="b in breeds">{{ b }}</p>
-  </div>
+    <div :class="flex ? 'flex' : ''">
+        <p v-for="b in breeds">{{ b }}</p>
+    </div>
 </template>
 
 <style scoped>
-  p {
+p {
     margin: 0 1rem
-  }
-  p:nth-child(even) {
+}
+
+p:nth-child(even) {
     color: hotpink;
-  }
-  .flex {
+}
+
+.flex {
     display: flex;
     flex-wrap: wrap;
-  }
+}
 </style>

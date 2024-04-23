@@ -1,19 +1,32 @@
 <script setup>
-    import BreedList from "@/components/BreedList.vue";
-    import DogImage from "@/components/DogImage.vue";
 </script>
 
 <template>
-    <h1>Dogs</h1>
-    <h2>Dog Image</h2>
-    <DogImage breed="akita" width="200px" height="200px"></DogImage>
-    <DogImage breed="shepherd australian"></DogImage>
-    <h2>Breeds</h2>
-    <BreedList flex></BreedList>
-    <h2>In column</h2>
-    <BreedList></BreedList>
-
+    <header>Dog App</header>
+    <nav>
+        <router-link :to="{name: 'Home'}">Home</router-link>
+        <router-link :to="{name: 'Breeds'}">Breed List</router-link>
+        <router-link :to="{name: 'Images'}">Random Dog</router-link>
+    </nav>
+    <main>
+        <router-view></router-view>
+    </main>
 </template>
 
-<style scoped>
+<style>
+header {
+    background-color: #86469C;
+    padding: 1rem;
+}
+nav {
+    padding: 1rem 0;
+    background-color: #BC7FCD;
+}
+
+nav a {
+    padding: 0 1rem;
+    text-decoration: none;
+}
+
+
 </style>

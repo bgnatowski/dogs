@@ -1,8 +1,13 @@
+import {reactive} from "vue";
 
+const breeds = reactive([])
+let fetching = false
 async function getBreeds() {
-    const breeds = []
-    if(breeds.length) return breeds
+    console.log('get breeds', breeds.length)
+    if(breeds.length || fetching) return breeds
+    fetching = true
     try {
+        console.log('get breeds', 'start fetch')
         const response = await fetch('https://dog.ceo/api/breeds/list/all')
         const {message} = await response.json()
         // oblicz breeds
@@ -13,9 +18,11 @@ async function getBreeds() {
                 message[key].forEach(sub => breeds.push(`${sub} ${key}`))
             }
         })
+        console.log('get breeds', 'fetch done')
     } catch {
         console.log('Błąd w czasie pobierania danych')
     }
+    fetching = false
     return breeds
 }
 // https://dog.ceo/api/breed/   hound/afghan    /images/random
@@ -24,10 +31,7 @@ async function getBreeds() {
 async function getRandomImage(breed){
     try {
         breed = breed.split(' ').reverse().join('/')
-        const path = breed ? `https://dog.ceo/api/breed/${breed}/images/random` : "https://dog.ceo/api/breeds/image/random"
-
-
-
+        const path = `https://dog.ceo/api/breed/${breed}/images/random`;
         const response = await fetch(path)
         const { message } = await response.json()
         return message
